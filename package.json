@@ -32,5 +32,13 @@
     "express"
   ],
   "author": "Stanley Masinde",
-  "license": "MIT"
+  "license": "MIT",
+  "directories": {
+    "test": "test"
+  },
+  "repository": "git+https://github.com/StanleyMasinde/express-blog.git",
+  "bugs": {
+    "url": "https://github.com/StanleyMasinde/express-blog/issues"
+  },
+  "homepage": "https://github.com/StanleyMasinde/express-blog#readme"
 }
