@@ -1,38 +1,38 @@
-const passport = require('passport')
+// eslint-disable-next-line new-cap
 const router = require('express').Router()
 const Post = require('../app/models/post')
 
 router.use((req, res, next) => {
-    req.user === null ? res.status(401).json('Unauthenticated') : next()
+	req.user === null ? res.status(401).json('Unauthenticated') : next()
 })
 
 router.get('/', async (req, res) => {
-    try {
-        const posts = await new Post().all()
-        res.json(posts)
-    } catch (error) {
-        res.status(500).json({ error: error })
-    }
+	try {
+		const posts = await new Post().all()
+		res.json(posts)
+	} catch (error) {
+		res.status(500).json({ error })
+	}
 })
 
 router.post('/', async (req, res) => {
-    try {
-        res.status(201).json(await new Post().create(req.body))
-    } catch (error) {
-        res.status(500).json(error)
-    }
+	try {
+		res.status(201).json(await new Post().create(req.body))
+	} catch (error) {
+		res.status(500).json(error)
+	}
 })
 
 router.get('/:id', (req, res) => {
-    res.json('First post')
+	res.json('First post')
 })
 
 router.put('/:id', (req, res) => {
-    res.status(201).json('Hello')
+	res.status(201).json('Hello')
 })
 
 router.delete('/:id', (req, res) => {
-    res.json('Deleted')
+	res.json('Deleted')
 })
 
 module.exports = router
