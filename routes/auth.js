@@ -3,12 +3,9 @@ const User = require('../app/models/user')
 
 const router = require('express').Router()
 
-router.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: false,
-    userProperty: 'user',
-}))
+router.post('/login', passport.authenticate('local'), (req, res) => {
+    res.json(req.user)
+})
 
 router.post('/register', async (req, res) => {
     // TODO add validation

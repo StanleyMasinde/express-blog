@@ -3,6 +3,7 @@ exports.up = function (knex) {
         table.bigIncrements('id')
         table.string('name')
         table.string('email').unique()
+        table.text('bio')
         table.text('password')
     })
 };

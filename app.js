@@ -32,6 +32,7 @@ passport.serializeUser(function (user, done) {
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth')
+const postsRouter = require('./routes/posts')
 
 const app = express();
 
@@ -47,5 +48,6 @@ app.use(passport.session())
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
+app.use('/posts', postsRouter)
 
 module.exports = app;
