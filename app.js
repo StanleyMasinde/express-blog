@@ -25,9 +25,16 @@ passport.use(new localStrategy({
         })
 }))
 passport.serializeUser(function (user, done) {
-    done(null, user);
+    done(null, user.id);
 });
-
+passport.deserializeUser((id, done) => {
+    new User().whereFirst({ id })
+        .then((user) => {
+            done(null, user)
+        }).catch(e => {
+            done(e)
+        })
+})
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');

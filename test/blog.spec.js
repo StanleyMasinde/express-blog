@@ -43,9 +43,10 @@ describe('Blog posts', () => {
             .send({
                 title: 'A blog post',
                 body: 'This is a simple post etc',
-                publised_at: new Date()
+                published_at: new Date()
             })
             .then(response => {
+                console.log(response.body);
                 expect(response.status).equals(201)
                 done()
             })
@@ -56,13 +57,13 @@ describe('Blog posts', () => {
 
     it('Get a post', (done) => {
         http.get('/posts/1')
-        .then(res => {
-            expect(res.status).equals(200)
-            done()
-        })
-        .catch(e => {
-            done(e)
-        }) 
+            .then(res => {
+                expect(res.status).equals(200)
+                done()
+            })
+            .catch(e => {
+                done(e)
+            })
     })
 
     it('Update the post', (done) => {
@@ -83,12 +84,24 @@ describe('Blog posts', () => {
 
     it('Delete a post', (done) => {
         http.delete('/posts/1')
-        .then(res => {
-            expect(res.status).equals(200)
-            done()
-        })
-        .catch(e => {
-            done(e)
-        }) 
+            .then(res => {
+                expect(res.status).equals(200)
+                done()
+            })
+            .catch(e => {
+                done(e)
+            })
+    })
+
+    it('Get all posts', (done) => {
+        http.get('/posts')
+            .then(res => {
+                expect(res.body).to.be.an('array')
+                expect(res.body.length).length.to.equal(1)
+                done()
+            })
+            .catch(e => {
+                done(e)
+            })
     })
 })
