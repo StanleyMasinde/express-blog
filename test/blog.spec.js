@@ -7,7 +7,7 @@ const chaiHttp = require('chai-http')
 chai.use(chaiHttp)
 const app = require('../app')
 
-const http = chai.request(app).keepOpen()
+const http = chai.request.agent(app)
 
 describe('Authentication test', () => {
 	it('Should create a new user', (done) => {
@@ -15,7 +15,7 @@ describe('Authentication test', () => {
 			.send({
 				name: 'John Doe',
 				email: 'john@example.com',
-				password: 'passowrd',
+				password: 'password',
 			})
 			.then(((res) => {
 				expect(res.status).equals(200)
