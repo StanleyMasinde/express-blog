@@ -108,3 +108,16 @@ describe('Blog posts', () => {
 			})
 	})
 })
+
+describe('End session', () => {
+	it('Logout user', (done) => {
+		http.post('/auth/logout')
+			.then((res) => {
+				expect(res.status).equals(200)
+				done()
+			})
+			.catch((e) => {
+				done(e)
+			})
+	})
+})
