@@ -3,7 +3,7 @@ const router = require('express').Router()
 const Post = require('../app/models/post')
 
 router.use((req, res, next) => {
-	req.user === null ? res.status(401).json('Unauthenticated') : next()
+	req.user === undefined ? res.status(401).json('Unauthenticated') : next()
 })
 
 router.get('/', async (req, res) => {

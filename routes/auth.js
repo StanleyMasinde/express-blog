@@ -10,7 +10,7 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 router.post('/register', async (req, res) => {
 	// TODO add validation
 	try {
-		const result = await new User().create(req.body)
+		const result = await new User().register(req.body)
 		res.status(result.status).json(result.message)
 	} catch (error) {
 		res.status(500).json(error)

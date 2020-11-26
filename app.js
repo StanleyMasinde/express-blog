@@ -19,7 +19,17 @@ passport.use(new LocalStrategy({
 }, (username, password, done) => {
 	new User().whereFirst({ email: username })
 		.then((u) => {
-			done(null, u)
+			compare(password, u.password, (err, same) => {
+				if (err) {
+					done(err)
+				}
+				if (same) {
+					done(null, u)
+				} else {
+					done('Invalid credentials')
+				}
+			})
+
 		}).catch((e) => {
 			done(e)
 		})
@@ -40,6 +50,7 @@ const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
 const postsRouter = require('./routes/posts')
+const { compare } = require('bcrypt')
 
 const app = express()
 
