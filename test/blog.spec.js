@@ -85,10 +85,11 @@ describe('Blog posts', () => {
 			})
 	})
 
-	it('Delete a post', (done) => {
-		http.delete('/posts/1')
+	it('Get all posts', (done) => {
+		http.get('/posts')
 			.then((res) => {
-				expect(res.status).equals(200)
+				expect(res.body).to.be.an('array')
+				expect(res.body.length).length.to.equal(1)
 				done()
 			})
 			.catch((e) => {
@@ -96,11 +97,10 @@ describe('Blog posts', () => {
 			})
 	})
 
-	it('Get all posts', (done) => {
-		http.get('/posts')
+	it('Delete a post', (done) => {
+		http.delete('/posts/1')
 			.then((res) => {
-				expect(res.body).to.be.an('array')
-				expect(res.body.length).length.to.equal(1)
+				expect(res.status).equals(200)
 				done()
 			})
 			.catch((e) => {

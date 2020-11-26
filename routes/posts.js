@@ -23,16 +23,32 @@ router.post('/', async (req, res) => {
 	}
 })
 
-router.get('/:id', (req, res) => {
-	res.json('First post')
+router.get('/:id', async (req, res) => {
+	try {
+		const post = await new Post().find(req.params.id)
+		res.json(post)
+	} catch (error) {
+		res.status(500).json(error)
+	}
 })
 
-router.put('/:id', (req, res) => {
-	res.status(201).json('Hello')
+router.put('/:id', async (req, res) => {
+	try {
+		const { message, status } = new Post().update(req.body, req.params.id)
+		res.status(status || 201).json(message)
+	} catch (error) {
+		res.status(500).json(error)
+	}
 })
 
-router.delete('/:id', (req, res) => {
-	res.json('Deleted')
+router.delete('/:id', async (req, res) => {
+	try {
+		const { message, status } = new Post().delete(req.params.id)
+
+		res.status(200 || status).json(message)
+	} catch (error) {
+		res.status(500).json(error)
+	}
 })
 
 module.exports = router
