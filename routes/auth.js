@@ -17,4 +17,9 @@ router.post('/register', async (req, res) => {
 	}
 })
 
+router.post('/logout', (req, res) => {
+	req.logOut()
+	res.json('Logged out')
+})
+
 module.exports = router
