@@ -8,6 +8,7 @@ const session = require('express-session')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('./app/models/user')
+const { compare } = require('bcryptjs')
 
 /**
  * Configure passport
@@ -50,7 +51,6 @@ const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
 const postsRouter = require('./routes/posts')
-const { compare } = require('bcrypt')
 
 const app = express()
 

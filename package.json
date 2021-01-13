@@ -5,11 +5,12 @@
   "scripts": {
     "start": "node ./bin/www",
     "migrate": "knex migrate:latest",
-    "test": "mocha --exit",
+    "pretest": "knex migrate:rollback && knex migrate:latest",
+    "test": "NODE_ENV=development mocha --exit",
     "lint": "eslint --ext .js --ignore-path .gitignore ./"
   },
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",

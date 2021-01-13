@@ -1,4 +1,4 @@
-const { hash } = require('bcrypt')
+const { hash } = require('bcryptjs')
 const Model = require('./model')
 
 class User extends Model {
