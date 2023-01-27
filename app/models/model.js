@@ -5,27 +5,27 @@ const queryBuilder = require('knex')(process.env.NODE_ENV === 'development' ? de
 
 class Model {
 	/**
-     *
-     * @param {String} table
-     */
+	 *
+	 * @param {String} table
+	 */
 	constructor(table = '') {
 		this.table = table
 		this.limit = 15
 	}
 
 	/**
-     * Get the table name for the current model
-     *
-     * @return String
-     */
+	 * Get the table name for the current model
+	 *
+	 * @return String
+	 */
 	tableName() {
 		return plurarize(this.constructor.name.toLowerCase())
 	}
 
 	/**
-     * Returns all records of the current model
-     * @return Promise
-     */
+	 * Returns all records of the current model
+	 * @return Promise
+	 */
 	async all() {
 		try {
 			return await queryBuilder(this.tableName()).select('*')
@@ -35,9 +35,9 @@ class Model {
 	}
 
 	/**
-     * Create a new Model
-     * @param {Array} attributes
-     */
+	 * Create a new Model
+	 * @param {Array} attributes
+	 */
 	async create(attributes = []) {
 		try {
 			const res = await queryBuilder.table(this.tableName()).insert(attributes)
@@ -48,10 +48,10 @@ class Model {
 	}
 
 	/**
-     * Update a model in the database
-     * @param {Array} attributes
-     * @param {Number} id
-     */
+	 * Update a model in the database
+	 * @param {Array} attributes
+	 * @param {Number} id
+	 */
 	async update(attributes = [], id) {
 		try {
 			await queryBuilder.table(this.tableName()).where({ id }).update(attributes)
@@ -62,9 +62,9 @@ class Model {
 	}
 
 	/**
-     * Delete a model from the database
-     * @param {Number} id
-     */
+	 * Delete a model from the database
+	 * @param {Number} id
+	 */
 	async delete(id) {
 		try {
 			const res = await queryBuilder.table(this.tableName()).where({ id }).delete()
@@ -75,9 +75,9 @@ class Model {
 	}
 
 	/**
-     * Get the first record
-     * @return Promise
-     */
+	 * Get the first record
+	 * @return Promise
+	 */
 	first() {
 		try {
 			return queryBuilder(this.tableName()).select('*').first()
@@ -87,10 +87,10 @@ class Model {
 	}
 
 	/**
-     * Find a model by database ID
-     * @param {Number} id
-     * @return Object
-     */
+	 * Find a model by database ID
+	 * @param {Number} id
+	 * @return Object
+	 */
 	find(id = 1) {
 		try {
 			return queryBuilder(this.tableName()).where('id', id).select('*').first()
@@ -100,11 +100,16 @@ class Model {
 	}
 
 	/**
-     * Query using a condition
-     * @param {Array} conditions
-     * @return Object
-     */
-	async whereFirst(conditions = {}) {
+	 * ========================================
+	 * ========Static Methods==================
+	 */
+
+	/**
+	 * Get the first Model that matches the given conditions
+	 * @param {*} conditions 
+	 * @returns 
+	 */
+	static async whereFirst(conditions = {}) {
 		try {
 			return await queryBuilder(this.tableName()).where(conditions).select('*').first()
 		} catch (error) {
