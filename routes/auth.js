@@ -1,6 +1,5 @@
 // eslint-disable-next-line new-cap
 const router = require('express').Router()
-const passport = require('passport')
 const User = require('../app/models/user')
 
 router
@@ -10,7 +9,7 @@ router
 		res.render('login')
 	})
 
-	.post('/login', passport.authenticate('local'), (req, res) => {
+	.post('/login', (req, res) => {
 		res.json(req.user)
 	})
 
