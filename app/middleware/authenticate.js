@@ -32,10 +32,12 @@ function authenticate() {
 			const matches = await compare(password, usr.password)
 			if (!matches) {
 				req.session.userId = usr.id
-				return next()
+				return res.redirect(302, '/dashboard')
 			}
 			errors.username.push(failedLoginResponse)
-			return res.status(422).json(errors)
+			return res.render('login', {
+				errors
+			})
 		} catch (error) {
 			next(error)
 		}
