@@ -113,9 +113,9 @@ class Model {
 		try {
 			return await queryBuilder(this.tableName()).where(conditions).select('*').first()
 		} catch (error) {
-			return error
+			throw new Error(error)
 		}
 	}
 }
 
-module.exports = Model
+module.exports = {Model, queryBuilder}

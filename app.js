@@ -29,4 +29,9 @@ app.use('/auth', authRouter)
 app.use('/users', usersRouter)
 app.use('/posts', postsRouter)
 
+// eslint-disable-next-line no-unused-vars
+app.use((err, _req, res, _next) => {
+	res.status(500).send(err.stack)
+})
+
 module.exports = app

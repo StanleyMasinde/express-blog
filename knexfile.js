@@ -1,3 +1,4 @@
+require('dotenv').config()
 module.exports = {
 
 	development: {
@@ -11,6 +12,7 @@ module.exports = {
 	staging: {
 		client: process.env.DB_CLIENT || 'mysql',
 		connection: {
+			host: process.env.DB_HOST || '127.0.0.1',
 			database: process.env.DB_DATABASE || 'express_blog',
 			user: process.env.DB_USER || 'username',
 			password: process.env.DB_PASSWORD || 'password',
@@ -27,6 +29,7 @@ module.exports = {
 	production: {
 		client: process.env.DB_CLIENT || 'mysql',
 		connection: {
+			host: process.env.DB_HOST || '127.0.0.1',
 			database: process.env.DB_CLIENT || 'my_db',
 			user: process.env.DB_USER || 'username',
 			password: process.env.DB_PASSWORD || 'password',

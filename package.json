@@ -8,7 +8,7 @@
     "pretest": "knex migrate:rollback && knex migrate:latest",
     "test": "NODE_ENV=development mocha --exit",
     "lint": "eslint --ext .js --ignore-path .gitignore ./",
-    "dev": "nodemon node ./bin/www",
+    "dev": "nodemon node ./bin/www -e js,pug",
     "dev:client": "tailwindcss -i ./src/app.css -o ./public/app.css --watch",
     "build": "tailwindcss -i ./src/app.css -o ./public/app.css --minify"
   },

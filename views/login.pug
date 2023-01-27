@@ -15,9 +15,13 @@ html(lang="en")
                     div 
                         label(for="username") Email or username 
                         input(id="username" type="text" name="username" class="w-full rounded-lg")
+                        if errors
+                            small(class="text-red-500")  #{errors.username}
                     div 
                         label(for="username") Password
                         input(type="password" name="password" class="w-full rounded-lg")
+                        if errors
+                            small(class="text-red-500")  #{errors.password}
                     button(type="submit" class="bg-primaryDark py-1 rounded-lg")
                         | Sign in
                     hr

@@ -1,5 +1,5 @@
 const { compare } = require('bcryptjs')
-const User = require('../models/user')
+const { queryBuilder } = require('../models/model')
 
 function authenticate() {
 	return async function (req, res, next) {
@@ -7,8 +7,8 @@ function authenticate() {
 		try {
 			const { username, password } = req.body
 			const errors = {
-				username: [''],
-				password: ['']
+				username: [],
+				password: []
 			}
 			if (!username) {
 				errors.username.push('The Email or username field is required')
@@ -17,18 +17,22 @@ function authenticate() {
 				errors.password.push('The password field is required')
 			}
 			if (errors.password.length > 0 || errors.username.length > 0) {
-				return res.status(422).json(errors)
+				return res.render('login', {
+					errors
+				})
 			}
 
-			const usr = await User.whereFirst({ email: username })
-			if (usr) {
+			const usr = await queryBuilder('users').where({ email: username }).select('*').first()
+			if (usr == undefined) {
 				errors.username.push(failedLoginResponse)
-				return res.status(422).json(errors)
+				return res.render('login', {
+					errors
+				})
 			}
 			const matches = await compare(password, usr.password)
 			if (!matches) {
 				req.session.userId = usr.id
-				next()
+				return next()
 			}
 			errors.username.push(failedLoginResponse)
 			return res.status(422).json(errors)
