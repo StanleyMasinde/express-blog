@@ -1,5 +1,5 @@
 const { compare } = require('bcryptjs')
-const { queryBuilder } = require('../models/model')
+const DB = require('../db')
 
 function authenticate() {
 	return async function (req, res, next) {
@@ -22,7 +22,7 @@ function authenticate() {
 				})
 			}
 
-			const usr = await queryBuilder('users').where({ email: username }).select('*').first()
+			const usr = await DB('users').where({ email: username }).select('*').first()
 			if (usr == undefined) {
 				errors.username.push(failedLoginResponse)
 				return res.render('login', {
