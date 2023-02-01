@@ -1,0 +1,12 @@
+extends layouts/dashboard.pug
+
+block content
+    main 
+        #posts
+        if posts.length > 0
+            div(class="bg-gray-300 border rounded-lg mx-2 px-2 py-3 text-center text-gray-700 mt-5")
+                h1(class="text-2xl font-serif")
+                h2 Total number of posts
+        else 
+            div(class="bg-gray-300 border rounded-lg mx-2 px-2 py-3 text-center text-gray-700 mt-5")
+                h1(class="text-2xl font-serif") No posts

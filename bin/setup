@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+const { queryBuilder } = require('../app/models/model')
+const readline = require('node:readline/promises')
+const { stdin: input, stdout: output } = require('node:process')
+const { hash } = require('bcryptjs')
+
+const rl = readline.createInterface({ input, output })
+
+// eslint-disable-next-line no-unexpected-multiline
+async function main() {
+	const name = await rl.question('Your name: ')
+	const email = await rl.question('Your email: ')
+	const pw = await rl.question('Pick a password: ')
+	const password =  await hash(pw, 10)
+	await queryBuilder('users').insert({ name, email, password })
+	rl.close()
+	process.exit(0)
+}
+
+main()

@@ -1,5 +1,5 @@
-const Model = require('./model')
+const { Model } = require('./model')
 
-class Post extends Model {}
+class Post extends Model { }
 
 module.exports = Post
