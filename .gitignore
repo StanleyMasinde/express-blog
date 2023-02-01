@@ -63,3 +63,4 @@ typings/
 # sqlite
 *.sqlite
 dev.sqlite3
+public/app.css
