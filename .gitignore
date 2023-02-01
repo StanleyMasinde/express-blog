@@ -62,3 +62,4 @@ typings/
 
 # sqlite
 *.sqlite
+dev.sqlite3
