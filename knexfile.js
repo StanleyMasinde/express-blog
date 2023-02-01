@@ -1,46 +1,62 @@
-require('dotenv').config()
-module.exports = {
+// Update with your config settings.
 
+/**
+ * @type { Object.<string, import("knex").Knex.Config> }
+ */
+module.exports = {
 	development: {
 		client: 'sqlite3',
 		connection: {
-			filename: './dev.sqlite',
+			filename: './dev.sqlite3'
 		},
-		useNullAsDefault: true,
+		migrations: {
+			directory: 'database/migrations',
+			tableName: 'migrations'
+		},
+		seeds: {
+			directory: './database/seeds'
+		}
 	},
 
 	staging: {
-		client: process.env.DB_CLIENT || 'mysql',
+		client: process.env.DATABASE_CLIENT || 'mysql',
 		connection: {
-			host: process.env.DB_HOST || '127.0.0.1',
-			database: process.env.DB_DATABASE || 'express_blog',
-			user: process.env.DB_USER || 'username',
-			password: process.env.DB_PASSWORD || 'password',
+			host: process.env.DATABASE_HOST || '127.0.01',
+			database: process.env.DATABASE_SCHEMA || 'my_blog',
+			user: process.env.DATABASE_USER || 'root',
+			password: process.env.DATABASE_PASSWORD
 		},
 		pool: {
 			min: 2,
-			max: 10,
+			max: 10
 		},
 		migrations: {
-			tableName: 'migrations',
+			directory: 'database/migrations',
+			tableName: 'migrations'
 		},
+		seeds: {
+			directory: './database/seeds'
+		}
 	},
 
 	production: {
-		client: process.env.DB_CLIENT || 'mysql',
+		client: process.env.DATABASE_CLIENT || 'mysql',
 		connection: {
-			host: process.env.DB_HOST || '127.0.0.1',
-			database: process.env.DB_CLIENT || 'my_db',
-			user: process.env.DB_USER || 'username',
-			password: process.env.DB_PASSWORD || 'password',
+			host: process.env.DATABASE_HOST || '127.0.01',
+			database: process.env.DATABASE_SCHEMA || 'my_blog',
+			user: process.env.DATABASE_USER || 'root',
+			password: process.env.DATABASE_PASSWORD
 		},
 		pool: {
 			min: 2,
-			max: 10,
+			max: 10
 		},
 		migrations: {
-			tableName: 'migrations',
+			directory: 'database/migrations',
+			tableName: 'migrations'
 		},
-	},
-
+		seeds: {
+			directory: './database/seeds'
+		}
+	}
 }
