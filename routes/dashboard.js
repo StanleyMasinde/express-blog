@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const auth = require('../app/middleware/auth')
-const { queryBuilder } = require('../app/models/model')
+const DB = require('../app/db')
 
 router.get('/', auth(), async (req, res, next) => {
 	try {
-		const postCount = await queryBuilder('posts').count('* as agg')
+		const postCount = await DB('posts').count('* as agg')
 		res.render('dashboard', {
 			postCount: postCount[0].agg
 		})
@@ -15,7 +15,7 @@ router.get('/', auth(), async (req, res, next) => {
 
 router.get('/posts', auth(), async (req, res, next) => {
 	try {
-		const posts = queryBuilder('posts').select()
+		const posts = DB('posts').select()
 		res.render('posts', {
 			posts
 		})
@@ -26,7 +26,7 @@ router.get('/posts', auth(), async (req, res, next) => {
 
 router.get('/profile', auth(), async (req, res, next) => {
 	try {
-		const user = await queryBuilder('users').where({ id: req.session.userId }).first()
+		const user = await DB('users').where({ id: req.session.userId }).first()
 		res.render('profile', {
 			user
 		})
