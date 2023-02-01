@@ -7,9 +7,13 @@ router
 		res.render('login')
 	})
 	.post('/login', authenticate())
-	.post('/logout', (req, res) => {
-		req.logOut()
-		res.json('Logged out')
+	.post('/logout', (req, res, next) => {
+		try {
+			req.session.destroy()
+			res.redirect('/auth/login')
+		} catch (err) {
+			next(err)
+		}
 	})
 
 module.exports = router
