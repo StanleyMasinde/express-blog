@@ -1,12 +1,15 @@
 const DB = require('knex')({
-	client: 'mysql',
+	client: process.env.DATABASE_CLIENT || 'mysql',
 	connection: {
-		host : '127.0.0.1',
-		port : 3306,
-		user : 'your_database_user',
-		password : 'your_database_password',
-		database : 'myapp_test'
-	}
+		host: process.env.DATABASE_HOST || '127.0.0.1',
+		database: process.env.DATABASE_SCHEMA || 'my_blog',
+		user: process.env.DATABASE_USER || 'root',
+		password: process.env.DATABASE_PASSWORD
+	},
+	pool: {
+		min: 2,
+		max: 10
+	},
 })
 
 module.exports = DB
