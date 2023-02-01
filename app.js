@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const authRouter = require('./routes/auth')
 const postsRouter = require('./routes/posts')
+const dashboardRouter = require('./routes/dashboard')
 
 const app = express()
 
@@ -28,6 +29,7 @@ app.use('/', indexRouter)
 app.use('/auth', authRouter)
 app.use('/users', usersRouter)
 app.use('/posts', postsRouter)
+app.use('/dashboard', dashboardRouter)
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, _req, res, _next) => {
