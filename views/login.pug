@@ -1,29 +1,22 @@
-doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible" content="IE=edge")
-        meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title Login
-        link(rel="stylesheet" href="/app.css")
-    body 
-    main 
-        div(class="flex justify-center h-screen place-items-center")
-            div(class="border rounded-md w-10/12 p-3")
-                h1(class="font-bold text-lg") Sign in 
-                form(action="" method="post" class="flex flex-col gap-3") 
-                    div 
-                        label(for="username") Email or username 
-                        input(id="username" type="text" name="username" class="w-full rounded-lg")
-                        if errors
-                            small(class="text-red-500")  #{errors.username}
-                    div 
-                        label(for="username") Password
-                        input(type="password" name="password" class="w-full rounded-lg")
-                        if errors
-                            small(class="text-red-500")  #{errors.password}
-                    button(type="submit" class="bg-primaryDark py-1 rounded-lg")
-                        | Sign in
-                    hr
-                    div 
-                        p Reset Password
+extends layouts/auth.pug
+
+block action 
+   | Sign in
+
+block content  
+    form(action="" method="post" class="flex flex-col gap-3") 
+        div 
+            label(for="username") Email or username 
+            input(id="username" type="text" name="username" class="w-full rounded-lg")
+            if errors
+                small(class="text-red-500")  #{errors.username}
+        div 
+            label(for="username") Password
+            input(type="password" name="password" class="w-full rounded-lg")
+            if errors
+                small(class="text-red-500")  #{errors.password}
+        button(type="submit" class="bg-primaryDark py-1 rounded-lg")
+            | Sign in
+        hr
+        div 
+            p Reset Password
