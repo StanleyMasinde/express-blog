@@ -1,0 +1,15 @@
+extends ../../layouts/dashboard.pug
+
+block content
+    main 
+        form(action="" method="post") 
+            div(class="px-3 rounded-lg shadow flex flex-col gap-3 py-5 justify-center")
+                div(class="flex justify-center flex-col")
+                    label(for="title") 
+                        h1 Title 
+                    input(type="text" id="title" name="title" placeholder="Awesome title" class="w-full rounded-lg")
+                div 
+                    label(for="body") 
+                        h1 Body 
+                    textarea(name="body" id="body" class="w-full rounded-lg")
+                button(type="submit" class="bg-primary py-2 rounded-lg text-white") Publish 
