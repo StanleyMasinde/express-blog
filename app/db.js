@@ -1,5 +1,5 @@
 const DB = require('knex')({
-	client: process.env.DATABASE_CLIENT || 'mysql',
+	client: process.env.DATABASE_CLIENT || 'mysql2',
 	connection: {
 		host: process.env.DATABASE_HOST || '127.0.0.1',
 		database: process.env.DATABASE_SCHEMA || 'my_blog',

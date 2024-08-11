@@ -1,16 +1,22 @@
+doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title #{title}
+        title Sign up to our newsletter
         link(rel="stylesheet" href="/app.css")
     body
-        main
-            div(class="grid h-screen justify-center place-content-center")
+        main 
+            div(class="h-screen grid place-items-center")
                 div(class="bg-gray-100 rounded-lg p-5 shadow-sm shadow-black")
-                    form(action="/newsletter" method="post") 
-                        h1 Sign up to our newsletter
+                    form(method="post") 
+                        h1(class="text-2xl") Sign up to our newsletter
+                        if errors
+                            div 
+                                if errors.name
+                                    p(class="text-red-500") #{errors.name}
+                                if errors.email
+                                    p(class="text-red-500")  #{errors.email}
                         div(class="flex flex-col gap-3")
                             div 
                                 label(for="name") Name

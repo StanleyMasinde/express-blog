@@ -9,13 +9,19 @@ const rl = readline.createInterface({ input, output })
 
 // eslint-disable-next-line no-unexpected-multiline
 async function main() {
-	const name = await rl.question('Your name: ')
-	const email = await rl.question('Your email: ')
-	const pw = await rl.question('Pick a password: ')
-	const password =  await hash(pw, 10)
-	await DB('users').insert({ name, email, password })
-	rl.close()
-	process.exit(0)
+	try {
+		const name = await rl.question('Your name: ')
+		const email = await rl.question('Your email: ')
+		const pw = await rl.question('Pick a password: ')
+		const password = await hash(pw, 10)
+		await DB('users').insert({ name, email, password })
+		rl.close()
+		process.exit(0)
+	} catch (err) {
+		// eslint-disable-next-line no-console
+		console.error('Failed to create user:', err.message)
+		process.exit(1)
+	}
 }
 
 main()
