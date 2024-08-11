@@ -15,7 +15,6 @@
         "prefer-const": "error",
         "no-var":"error",
         "no-unused-vars":"error",
-        "camelcase":"error",
         "indent": [
             "error",
             "tab"
